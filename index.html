@@ -23,67 +23,54 @@ function sprite(x,y,k=1,color='#c878a3',t=0){const [a,b]=P(x,y);const bob=Math.s
 function bed(x,y,color){cube(x,y,1.4,1.9,12,'#c28b94','#ad7a85',color);cube(x,y,.4,1.9,20,'#aa7182','#9e6677','#e5c0d2');floor(x+.5,y+.2,.7,.55,'#fffaf3')}
 function windowAt(x,y){cube(x,y,.18,.65,39,'#91c9c9','#6b9fa9','#e9fbef');line(x+.15,y+.3,'✦',13,'#fff')}
 
+const resortArt=new Image();let resortArtReady=false;resortArt.onload=()=>{resortArtReady=true};resortArt.src='resort-scene.svg';
 function drawOutside(){
-  // Isometric resort campus: lush lawn, perimeter road and paths.
-  floor(-1,-1,14,13,'#9ccca2');
-  for(let x=-1;x<13;x++)for(let y=-1;y<12;y++){if((x+y)%2===0)floor(x,y,1,1,'#a7d8ad');}
-  floor(4.7,1,1.4,11,'#eadbc4');floor(-.4,6.2,13.3,1.2,'#eadbc4');
-  for(let i=0;i<9;i++){floor(5,1.6+i*1.05,.6,.09,'#fdf6df');}
-  // Hotel's elevated foundation, landscaped entrance
-  floor(.25,.15,5.6,5.6,'#d4bcaa');
-  cube(.55,.35,5,4.8,124+lv('rooms')*4,'#f4d9c3','#d4ad9c','#fff5e8');
-  // Overhanging white flat roof with decorative parapet
-  cube(.35,.18,5.4,5.15,12,'#f0e9da','#e2d3c0','#fff9e9');
-  // Windows and glass balconies on front facade
-  for(let row=0;row<3;row++)for(let col=0;col<4;col++){
-    const x=.95+col*1.05,y=4.94;
-    const [a,b]=P(x,y,34+row*30);
-    rect(a-13,b-23,26,22,'#f7faf8');rect(a-10,b-20,20,16,'#79bbcd');
-    rect(a-2,b-20,3,16,'#eaf7f5');rect(a-13,b-5,26,3,'#efe1d1');
-    rect(a-15,b+2,30,4,'#ffffff');
+  if(resortArtReady){c.drawImage(resortArt,0,0,1000,680)}else{c.fillStyle='#b7dfdd';c.fillRect(0,0,1000,680);c.fillStyle='#246273';c.font='bold 22px system-ui';c.textAlign='center';c.fillText('Đang tải khu nghỉ dưỡng...',500,320)}
+  // Buildable facilities appear as natural signage rather than pixel blocks.
+  c.textAlign='center';c.font='bold 13px system-ui';
+  const signs=[['pool',822,407,'HỒ BƠI'],['gym',925,457,'PHÒNG GYM'],['food',70,440,'NHÀ HÀNG']];
+  for(const [id,x,y,label] of signs){
+    if(lv(id)>0)continue;
+    c.fillStyle='#203f48bb';c.beginPath();c.roundRect(x-58,y-20,116,34,8);c.fill();
+    c.fillStyle='#fff';c.fillText('🔒 '+label,x,y+1);
   }
-  // Rooftop terrace with planters and soft green details
-  for(let i=0;i<4;i++){const [a,b]=P(1.2+i*1.1,.75,145+lv('rooms')*4);rect(a-6,b-3,12,6,'#e7e8d5');rect(a-3,b-13,6,12,'#5b9e77');}
-  // Entrance door & canopy
-  cube(2.35,5.13,1.35,.45,34,'#eacbb1','#cba98c','#fff1dc');
-  const [doorX,doorY]=P(2.85,5.26,10);
-  rect(doorX-12,doorY-30,24,34,'#387b85');rect(doorX-1,doorY-29,2,30,'#d7f6ed');
-  line(2.9,5.9,'✦ BẢO BỐI RESORT ✦',16,'#255f6a');
-  // Gardens and trees around the campus
-  for(let i=0;i<Math.min(24,8+lv('garden')*3);i++){
-    let x=.1+(i*4.73)%12.5,y=.1+(i*3.37)%11.5;
-    if(x<6&&y<6.1||x>6.7&&x<11.2&&y<4.8||x>6.6&&y>5.7&&y<9.5)continue;
-    if(i%3===0)flower(x,y);else tree(x,y,.62+i%3*.1);
-  }
-  // Swimming pool with gradient water tiles, shade and loungers
-  if(lv('pool')){
-    floor(6.65,.7,4.65,4.35,'#f9e9d7');
-    floor(7.05,1.1,3.85,3.45,'#6cc0d0');
-    for(let i=0;i<8;i++){floor(7.2+(i%4)*.9,1.2+Math.floor(i/4)*1.5,.4,.11,i%2?'#a8e7e8':'#86d7e0');}
-    for(let i=0;i<3;i++){cube(6.75+i*1.6,4.8,.9,.3,6,'#f4eee2','#e2d6c7','#fffef4');}
-    tree(11,1.1,.84);line(9.0,5.3,'🏊 HỒ BƠI',16,'#176b82');
-  }else{floor(7,1.2,3.9,3.2,'#c4d8bf');line(8.6,3,'🔒 HỒ BƠI',16);}
-  // Fitness building
-  if(lv('gym')){
-    floor(6.8,5.7,4.05,3.2,'#d7d1c5');
-    cube(7,5.8,3.45,2.65,68,'#afdbd7','#83b5b6','#f6eee1');
-    for(let i=0;i<3;i++){const [a,b]=P(7.4+i*.95,8.43,35);rect(a-9,b-18,18,18,'#5b9ca4');rect(a-1,b-18,2,18,'#d1e5dc');}
-    line(8.4,8.85,'🏋 FITNESS',15,'#2a6e78');
-  }else{line(8.25,7.5,'🔒 FITNESS',16);}
-  if(lv('food')){
-    floor(.6,7.7,4.25,3.3,'#f8e5d4');
-    cube(.8,7.9,3.7,2.55,56,'#f9d0a5','#daa98a','#fff3df');
-    for(let i=0;i<3;i++){const [a,b]=P(1.2+i,10.3,28);rect(a-8,b-18,16,18,'#8ccbc8');}
-    line(2.4,10.7,'☕ NHÀ HÀNG',15,'#946542');
-  }else{line(2.4,9.2,'🔒 NHÀ HÀNG',16);}
-  for(let i=0;i<8;i++)flower(4.5+i*.13,5.45+i*.19);
+  if(lv('garden')>2){c.fillStyle='#3f9a6e';for(let i=0;i<Math.min(18,lv('garden')*2);i++){let x=105+i*44%800,y=465+i*13%100;c.beginPath();c.arc(x,y,3+(i%3),0,Math.PI*2);c.fill()}}
+  if(lv('rooms')>3){c.fillStyle='#fff9e7';c.font='bold 12px system-ui';c.fillText('★ '+lv('rooms')+' PHÒNG',330,166)}
+}
+function guestFigure(x,y,k,color,t){
+  // Human-sized, proportional silhouettes: no oversized heads or chibi styling.
+  c.save();c.translate(x,y+Math.sin(t)*1.5);c.scale(k,k);
+  c.fillStyle='#31484a44';c.beginPath();c.ellipse(0,3,12,4,0,0,Math.PI*2);c.fill();
+  c.strokeStyle='#344b53';c.lineWidth=4;c.lineCap='round';
+  c.beginPath();c.moveTo(-4,-21);c.lineTo(-5+Math.sin(t)*2,-3);c.moveTo(4,-21);c.lineTo(5-Math.sin(t)*2,-3);c.stroke();
+  c.fillStyle=color;c.beginPath();c.moveTo(-8,-48);c.lineTo(9,-48);c.lineTo(7,-23);c.lineTo(-8,-23);c.closePath();c.fill();
+  c.strokeStyle=color;c.lineWidth=4;c.beginPath();c.moveTo(-7,-45);c.lineTo(-12,-30+Math.sin(t)*2);c.moveTo(8,-45);c.lineTo(13,-32-Math.sin(t)*2);c.stroke();
+  c.fillStyle='#d9a681';c.fillRect(-3,-52,6,6);c.beginPath();c.ellipse(0,-58,8,11,0,0,Math.PI*2);c.fill();
+  c.fillStyle='#493f37';c.beginPath();c.ellipse(0,-66,8,4,0,Math.PI,Math.PI*2);c.fill();
+  c.restore();
 }
 function drawInside(){floor(0,0,12,11,'#edd2bf');for(let x=0;x<12;x++)for(let y=0;y<11;y++)floor(x,y,1,1,(x+y)%2?'#f6e2d0':'#ffeddf');
 cube(0,0,12,.3,94,'#eab6c8','#d19caf','#ffe5ee');cube(0,0,.3,11,94,'#eab6c8','#d19caf','#ffe5ee');
 for(let i=0;i<Math.min(lv('rooms'),9);i++){const x=.8+(i%3)*3.6,y=1.2+Math.floor(i/3)*3.1;floor(x,y,3.2,2.8,'#f4c9d7');cube(x,y,3.2,.15,24,'#dc9fb8','#c38fa9','#ffe3ef');cube(x,y,.15,2.8,24,'#dc9fb8','#c38fa9','#ffe3ef');bed(x+.35,y+.35,i%2?'#d9b9e4':'#f7b6d0');cube(x+2.2,y+.4,.5,.6,17,'#aa8d84','#957a70','#e7d3bb');if(lv('decor')>=2)flower(x+2.4,y+1.5);if(lv('decor')>=3)cube(x+1.5,y+2,.8,.4,10,'#a38d9e','#a38d9e','#fff3da');line(x+1.5,y+2.5,'P'+(101+i),11)}
 cube(4.6,9,2.4,1,26,'#b78987','#9b747b','#f7d8c5');line(5.7,9.5,'LỄ TÂN',13);for(let i=0;i<lv('decor');i++){const x=.7+i*1.7;flower(x,10)}
 }
-function draw(){c.clearRect(0,0,1000,680);const g=c.createLinearGradient(0,0,0,680);g.addColorStop(0,'#88c9df');g.addColorStop(.6,'#e6f3e1');g.addColorStop(1,'#b4d9ae');c.fillStyle=g;c.fillRect(0,0,1000,680);c.fillStyle='#ffffff80';for(let i=0;i<8;i++){c.beginPath();c.ellipse(75+i*130,65+(i%3)*37,54,13,0,0,Math.PI*2);c.fill()}c.save();c.translate(-12,28);if(s.view==='outside')drawOutside();else drawInside();for(let i=0;i<Math.min(14,Math.max(3,s.guests+2));i++){const t=frame*.013*(.55+i*.07)+i*2.2;let x,y;if(s.view==='outside'){x=5.5+Math.sin(t)*(.8+i%3*.5);y=6.7+Math.cos(t*.8)*(1.3+i%2)}else{x=3.4+Math.sin(t)*2.2;y=8.4+Math.cos(t*.7)*1.1}sprite(x,y,.78,['#ce6e9d','#7f9fc2','#dfaa73','#ac86c8'][i%4],t)}c.restore();c.fillStyle='#164e60bb';c.fillRect(18,18,180,33);c.fillStyle='#fff';c.font='bold 16px system-ui';c.textAlign='center';c.fillText(s.view==='outside'?'🌿 RESORT OVERVIEW':'🛏️ HOTEL INTERIOR',108,40);}
+function draw(){
+  c.clearRect(0,0,1000,680);
+  if(s.view==='outside'){
+    drawOutside();
+    for(let i=0;i<Math.min(10,Math.max(3,s.guests+2));i++){
+      let t=frame*.010*(.5+i*.06)+i*2;
+      let x=340+Math.sin(t+i*.7)*(100+i%3*34);
+      let y=520+Math.cos(t*.7+i)*35+i%3*20;
+      guestFigure(x,y,.67+i%3*.11,['#b97f70','#6d9b9b','#d5a15b','#8a8cab'][i%4],t);
+    }
+  }else{
+    const grad=c.createLinearGradient(0,0,0,680);grad.addColorStop(0,'#c9e8e6');grad.addColorStop(1,'#f8e5d7');c.fillStyle=grad;c.fillRect(0,0,1000,680);
+    c.save();c.translate(-12,28);drawInside();c.restore();
+    for(let i=0;i<Math.min(8,Math.max(3,s.guests));i++){const t=frame*.012+i*2.2;guestFigure(460+Math.sin(t)*135,485+Math.cos(t*.6)*45,.9,['#b97f70','#6d9b9b','#d5a15b','#8a8cab'][i%4],t)}
+  }
+  c.fillStyle='#174d59bb';c.beginPath();c.roundRect(20,18,208,38,10);c.fill();c.fillStyle='#fff';c.textAlign='center';c.font='bold 16px system-ui';c.fillText(s.view==='outside'?'🌴 TOÀN CẢNH RESORT':'🏨 BÊN TRONG KHÁCH SẠN',124,43);
+}
 function render(){ $('day').textContent=s.day;$('cash').textContent=s.cash;$('rep').textContent=Math.min(5,1+Math.floor((lv('garden')+lv('decor')+lv('pool')+lv('gym')+lv('food'))/4));$('rooms').textContent=lv('rooms');$('guests').textContent=s.guests;const r=s.report;$('report').innerHTML='<div class="chip">🛏️ Đặt phòng: <b>'+r.booked+'</b></div><div class="chip">💵 Tiền phòng: <b>'+r.room+'</b> xu</div><div class="chip">🍹 Tiện ích: <b>'+r.services+'</b> xu</div><div class="chip">💰 Tổng thu: <b>'+r.total+'</b> xu</div>';
 $('outBtn').className=s.view==='outside'?'':'alt';$('inBtn').className=s.view==='inside'?'':'alt';$('shop').replaceChildren();for(const [id,name,build,upgrade,max] of items){const l=lv(id),cost=l?upgrade*l:build,box=document.createElement('div');box.className='item';const title=document.createElement('b');title.textContent=name;const info=document.createElement('div');info.className='muted';info.textContent='Cấp '+l+'/'+max;const btn=document.createElement('button');btn.textContent=l>=max?'Tối đa':(l?'Nâng cấp ':'Xây mới ')+cost+' xu';btn.disabled=l>=max||s.cash<cost;btn.onclick=()=>buy(id);box.append(title,info,btn);$('shop').append(box)}$('log').replaceChildren();for(const t of s.log){const d=document.createElement('div');d.textContent=t;$('log').append(d)}save()}
 function buy(id){const def=items.find(a=>a[0]===id),l=lv(id),cost=l?def[3]*l:def[2];if(l>=def[4]||s.cash<cost)return;s.cash-=cost;s.levels[id]=l+1;notice('Đã nâng cấp '+def[1]+' lên cấp '+(l+1)+'!');render()}
