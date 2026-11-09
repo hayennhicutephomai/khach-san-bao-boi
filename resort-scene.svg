@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" width="1200" height="720">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#a8dce6"/><stop offset="1" stop-color="#ecf3dd"/></linearGradient>
+ <linearGradient id="glass" x2="1" y2=".8"><stop stop-color="#4e8e98"/><stop offset=".5" stop-color="#a0d5da"/><stop offset="1" stop-color="#3d8596"/></linearGradient>
+ <linearGradient id="wall" x2="1" y2="1"><stop stop-color="#fff4df"/><stop offset="1" stop-color="#e8caae"/></linearGradient>
+ <linearGradient id="water" x2="0" y2="1"><stop stop-color="#49a9c1"/><stop offset="1" stop-color="#9ce4dd"/></linearGradient>
+ <linearGradient id="grass" x2="0" y2="1"><stop stop-color="#a4ca97"/><stop offset="1" stop-color="#5b9f7d"/></linearGradient>
+ <linearGradient id="walk" x2="0" y2="1"><stop stop-color="#eadbc7"/><stop offset="1" stop-color="#cdbba7"/></linearGradient>
+ <filter id="shade" x="-20%" y="-20%" width="160%" height="180%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#335b58" flood-opacity=".22"/></filter>
+ <filter id="soft" x="-20%" y="-20%" width="160%" height="160%"><feGaussianBlur stdDeviation="6"/></filter>
+ <pattern id="pavers" width="34" height="24" patternUnits="userSpaceOnUse"><path d="M0 0H34 M17 0V12 M0 12H34 M0 12V24 M34 12V24" stroke="#c6b9a7" opacity=".36" fill="none"/></pattern>
+ <pattern id="ripple" width="90" height="42" patternUnits="userSpaceOnUse"><path d="M7 14q18-9 36 0 M45 33q16-8 34 0" stroke="#e1fffa" stroke-width="3" opacity=".55" fill="none"/></pattern>
+ <g id="palm"><path d="M0 5Q-10-60 8-122" fill="none" stroke="#82694b" stroke-width="14" stroke-linecap="round"/><path d="M8-122Q-55-171-86-125Q-40-147 8-122Q56-170 95-128Q48-141 8-122Q3-188 20-202Q-4-161 8-122Q-45-126-69-93Q-30-119 8-122Q61-123 81-86Q39-120 8-122" fill="#3f8060" stroke="#2a7655" stroke-width="3"/></g>
+ <g id="shrub"><ellipse cx="0" cy="4" rx="39" ry="11" fill="#5e8d64" opacity=".25"/><circle cx="-22" cy="-9" r="23" fill="#4c906b"/><circle cx="2" cy="-17" r="29" fill="#4d9971"/><circle cx="26" cy="-10" r="20" fill="#69ac79"/><path d="M-28-16q9-17 18-5 M0-28q10-14 18-1" stroke="#98c99a" stroke-width="4" fill="none"/></g>
+ <g id="balcony"><rect x="0" y="0" width="115" height="70" rx="2" fill="#fbf0d9"/><rect x="8" y="6" width="99" height="54" fill="url(#glass)"/><path d="M58 7V61 M11 21H104" stroke="#e9e8dc" stroke-width="4"/><path d="M9 53l28-39 6 0-28 39 M62 51l31-37h8L73 51" fill="#def8f7" opacity=".3"/><path d="M-7 57H122V73H-7" fill="#f6f1e5" stroke="#d7c3a9" stroke-width="2"/><path d="M0 58V72M29 58V72M58 58V72M87 58V72M115 58V72" stroke="#d6e2d9" stroke-width="3"/></g>
+ <g id="lamp"><path d="M0 0V-77" stroke="#536566" stroke-width="5"/><path d="M-17-80h34l-7 14h-20z" fill="#f7f0d2" stroke="#596966" stroke-width="3"/><circle cx="0" cy="-73" r="18" fill="#fff2c9" opacity=".18"/></g>
+</defs>
+<rect width="1200" height="720" fill="url(#sky)"/>
+<circle cx="1082" cy="93" r="53" fill="#fff1bd" opacity=".8"/>
+<path d="M0 250Q150 205 310 247T590 239T900 231T1200 250V450H0" fill="#91baa1" opacity=".55"/>
+<path d="M0 305Q210 259 420 298T840 277T1200 300V480H0" fill="#7cad94" opacity=".6"/>
+<path d="M0 390H1200V720H0" fill="url(#grass)"/>
+<path d="M0 550Q244 506 420 545T840 520T1200 548V720H0" fill="#85b58c"/>
+<path d="M0 625Q210 590 400 626T850 608T1200 617V720H0" fill="#7fae88"/>
+<!-- landscaped hotel ground -->
+<path d="M70 471L850 471L939 704H0Z" fill="url(#walk)" opacity=".94"/>
+<path d="M70 471L850 471L939 704H0Z" fill="url(#pavers)" opacity=".55"/>
+<path d="M405 450L555 450L748 720H209Z" fill="#ece1d0"/>
+<path d="M405 450L555 450L748 720H209Z" fill="url(#pavers)"/>
+<path d="M80 472L850 472" stroke="#e9e4cf" stroke-width="12"/>
+<!-- hotel main building -->
+<g filter="url(#shade)">
+ <path d="M149 168L657 168L710 192V478H149Z" fill="url(#wall)" stroke="#d6bda5" stroke-width="4"/>
+ <path d="M657 168L710 192V478H657Z" fill="#d5b49a"/>
+ <rect x="134" y="158" width="540" height="20" rx="6" fill="#fbf8e9"/>
+ <path d="M123 156L650 156L676 161H134Z" fill="#d9c9ac"/>
+ <rect x="151" y="187" width="502" height="281" fill="none" stroke="#e8dac2" stroke-width="8"/>
+ <path d="M147 280H654M147 371H654" stroke="#eee0cd" stroke-width="10"/>
+ <g transform="translate(180 202)"><use href="#balcony"/></g>
+ <g transform="translate(334 202)"><use href="#balcony"/></g>
+ <g transform="translate(488 202)"><use href="#balcony"/></g>
+ <g transform="translate(180 295)"><use href="#balcony"/></g>
+ <g transform="translate(334 295)"><use href="#balcony"/></g>
+ <g transform="translate(488 295)"><use href="#balcony"/></g>
+ <path d="M151 382H654V474H151Z" fill="#f5ead7"/>
+ <rect x="164" y="389" width="136" height="74" fill="url(#glass)" stroke="#f8f4e4" stroke-width="7"/>
+ <rect x="484" y="389" width="155" height="74" fill="url(#glass)" stroke="#f8f4e4" stroke-width="7"/>
+ <path d="M223 392v70M560 392v70" stroke="#f6f4eb" stroke-width="5"/>
+ <rect x="333" y="381" width="118" height="93" rx="2" fill="#437c87" stroke="#f5e6d4" stroke-width="7"/>
+ <path d="M393 383V475" stroke="#d6e8e5" stroke-width="4"/>
+ <circle cx="384" cy="437" r="3" fill="#e9dbaa"/><circle cx="403" cy="437" r="3" fill="#e9dbaa"/>
+ <path d="M305 367H473L489 389H292Z" fill="#f1eee4" stroke="#c6a990" stroke-width="4"/>
+ <path d="M300 369H482L465 359H314Z" fill="#e2c19f"/>
+ <rect x="248" y="116" width="330" height="48" rx="6" fill="#f8f4e5" stroke="#d6bd9e" stroke-width="5"/>
+ <text x="413" y="147" text-anchor="middle" font-family="Georgia,serif" letter-spacing="4" font-size="27" font-weight="bold" fill="#356d70">BẢO BỐI RESORT</text>
+ <path d="M259 114Q269 99 283 108 M540 110Q555 98 567 114" stroke="#3f8c65" stroke-width="10" fill="none"/>
+</g>
+<!-- pool area -->
+<g filter="url(#shade)">
+ <path d="M751 471L1104 443L1188 599L802 630Z" fill="#f4e7cf" stroke="#faf5df" stroke-width="9"/>
+ <path d="M789 486L1075 466L1144 578L823 602Z" fill="url(#water)" stroke="#e9ffff" stroke-width="9"/>
+ <path d="M789 486L1075 466L1144 578L823 602Z" fill="url(#ripple)" opacity=".8"/>
+ <path d="M796 496L1071 478M810 515L1081 495" stroke="#d9f9ee" stroke-width="4" opacity=".5"/>
+ <path d="M840 609l-20-27 M868 607l-20-27" stroke="#acc5bb" stroke-width="4"/>
+ <rect x="909" y="432" width="88" height="12" rx="6" fill="#fcf5e8" transform="rotate(-5 909 432)"/>
+ <rect x="1028" y="423" width="85" height="12" rx="6" fill="#fcf5e8" transform="rotate(-5 1028 423)"/>
+ <path d="M985 443V365" stroke="#e7dec9" stroke-width="6"/><path d="M907 371Q982 312 1066 365Z" fill="#fff0d9" stroke="#d1bc9b" stroke-width="3"/>
+</g>
+<!-- cafe and gym side buildings -->
+<g filter="url(#shade)">
+ <path d="M0 380L142 370L142 498H0Z" fill="#e8c3a4"/>
+ <path d="M0 373L144 361L152 375L0 390Z" fill="#985f4e"/>
+ <path d="M10 406H126V478H10" fill="#6da3a3"/>
+ <path d="M0 401L143 391L142 411L0 422Z" fill="#e9a27f"/>
+ <path d="M10 399l22-2v18l-22 2M54 395l22-2v18l-22 2M98 392l22-2v18l-22 2" fill="#fff1e4"/>
+ <text x="65" y="449" font-size="18" text-anchor="middle" fill="#fff9ec" font-family="sans-serif" font-weight="bold">CAFÉ</text>
+ <path d="M1028 277L1200 266V451L1028 469Z" fill="#d3e6dc" stroke="#a9c2b9" stroke-width="3"/>
+ <path d="M1022 267L1200 257V282L1022 291Z" fill="#f7efdd"/>
+ <rect x="1045" y="306" width="126" height="113" fill="url(#glass)" stroke="#eff4e9" stroke-width="8"/>
+ <path d="M1110 310V415M1047 355h121" stroke="#f5f3e9" stroke-width="5"/>
+ <text x="1108" y="453" font-size="20" text-anchor="middle" fill="#356d6f" font-family="sans-serif" font-weight="bold">FITNESS</text>
+</g>
+<!-- greenery, benches, lamps -->
+<use href="#palm" transform="translate(112 505) scale(.87)"/>
+<use href="#palm" transform="translate(722 461) scale(.66)"/>
+<use href="#palm" transform="translate(1169 525) scale(.7)"/>
+<use href="#shrub" transform="translate(194 504)"/><use href="#shrub" transform="translate(302 492) scale(.75)"/>
+<use href="#shrub" transform="translate(654 478)"/><use href="#shrub" transform="translate(764 640)"/>
+<use href="#shrub" transform="translate(63 613) scale(1.3)"/><use href="#shrub" transform="translate(1190 648)"/>
+<use href="#lamp" transform="translate(270 600)"/><use href="#lamp" transform="translate(708 583)"/>
+<g fill="#f5d09e"><circle cx="149" cy="534" r="4"/><circle cx="135" cy="540" r="4"/><circle cx="602" cy="513" r="4"/><circle cx="739" cy="666" r="4"/></g>
+<path d="M0 692Q190 681 337 703T774 688T1200 694" stroke="#c1dec0" stroke-width="4" fill="none" opacity=".35"/>
+</svg>
