@@ -1,7 +1,7 @@
 <!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Khách Sạn Bảo Bối — Pixel Resort</title><style>
-*{box-sizing:border-box}body{margin:0;background:#f9e8ef;color:#664457;font:14px system-ui,sans-serif}header{text-align:center;background:#f6c9dc;padding:13px}h1{font-size:25px;margin:0;color:#99466e}h2{font-size:16px;margin:0 0 9px}main{max-width:1350px;margin:auto;padding:12px}.stats{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin:10px 0}.stats span{background:white;padding:9px 14px;border-radius:12px;font-weight:700}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:12px}.panel{background:white;border:2px solid #f0bed2;border-radius:14px;padding:11px;margin-bottom:10px}canvas{width:100%;height:auto;display:block;background:#d4e9d6;border-radius:10px;image-rendering:pixelated;cursor:pointer}button{background:#b94e86;border:0;color:white;border-radius:9px;padding:10px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45}button.alt{background:#e9b7ce;color:#753d5d}.row{display:flex;gap:7px;flex-wrap:wrap;margin:9px 0}.row button{flex:1}.shop{display:grid;grid-template-columns:1fr 1fr;gap:7px}.item{background:#fff5f9;border:1px solid #f0d1df;border-radius:9px;padding:9px}.item button{width:100%;font-size:12px;margin-top:5px}.muted{font-size:12px;color:#997a8d}.log{max-height:150px;overflow:auto;font-size:12px}.log div{padding:5px;border-bottom:1px solid #f8e5ee}#tip{background:#fff0bc;padding:9px;border-radius:8px;margin:8px 0;min-height:37px}.chip{background:#f9e1ed;border-radius:8px;padding:7px;margin:5px 0}@media(max-width:900px){.layout{grid-template-columns:1fr}.shop{grid-template-columns:repeat(2,1fr)}} </style></head><body>
-<header><h1>🌸 KHÁCH SẠN BẢO BỐI 🌸</h1><div>PIXEL RESORT • Quản lý khu nghỉ dưỡng</div></header><main><div class="stats"><span>📅 Ngày <b id="day"></b></span><span>💰 <b id="cash"></b> xu</span><span>⭐ <b id="rep"></b> sao</span><span>🛏️ <b id="rooms"></b> phòng</span><span>👥 <b id="guests"></b> khách</span></div>
-<div class="layout"><section><div class="panel"><div class="row"><button id="outBtn" onclick="setView('outside')">🌳 TOÀN CẢNH</button><button id="inBtn" onclick="setView('inside')" class="alt">🏨 BÊN TRONG</button><button onclick="day()">🌞 NGÀY MỚI</button><button id="autoBtn" onclick="auto()" class="alt">⏱️ Tự chạy: Tắt</button></div><canvas id="game" width="1000" height="680"></canvas><div id="tip">Chạm vào các công trình để xem thông tin. Khách sẽ tự đi lại.</div><div class="muted">Đồ họa pixel art tự vẽ • Bấm Toàn cảnh / Bên trong để đổi góc nhìn • Tiền trong game là tiền ảo.</div></div><div class="panel"><h2>📜 Nhật ký khách sạn</h2><div class="log" id="log"></div></div></section><aside><div class="panel"><h2>🛎️ Doanh thu ngày trước</h2><div id="report"></div></div><div class="panel"><h2>🛒 Xây dựng & nội thất</h2><div class="shop" id="shop"></div></div><div class="panel"><button class="alt" onclick="restart()">🔄 Bắt đầu lại</button><p class="muted">Game tự lưu trên trình duyệt này. Bản này chơi một mình; khách là nhân vật tự động.</p></div></aside></div></main>
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#e9f6fa,#fff0e7 60%,#e7f4e3);color:#34505a;font:14px system-ui,-apple-system,sans-serif}header{text-align:center;background:linear-gradient(100deg,#185a69,#338e93);color:#fff;padding:18px 12px;box-shadow:0 5px 26px #19576b30}h1{font-size:clamp(23px,3vw,38px);margin:0;color:#fff;letter-spacing:2px;text-shadow:0 3px 15px #173d5266}header div{letter-spacing:2px;font-size:11px;margin-top:5px;opacity:.84}h2{font-size:16px;margin:0 0 11px;color:#245a65}main{max-width:1600px;margin:auto;padding:16px}.stats{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin:6px 0 16px}.stats span{background:#ffffffd9;padding:10px 16px;border-radius:14px;font-weight:700;border:1px solid #c3dfe1;box-shadow:0 3px 12px #1d607510}.layout{display:grid;grid-template-columns:minmax(0,1fr) 305px;gap:15px}.panel{background:#fffffff2;border:1px solid #d5e8e9;border-radius:17px;padding:14px;margin-bottom:13px;box-shadow:0 8px 25px #17566c12}canvas{width:100%;height:auto;display:block;background:#b7e0db;border-radius:14px;cursor:pointer;box-shadow:inset 0 0 0 2px #fff8}button{background:linear-gradient(145deg,#2698a4,#176b80);border:0;color:white;border-radius:12px;padding:11px 13px;font-weight:750;cursor:pointer;box-shadow:0 3px 8px #12697825}button:hover{filter:brightness(1.08)}button:disabled{opacity:.42;cursor:default}button.alt{background:#e3f2f1;color:#246578;box-shadow:none}.row{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 12px}.row button{flex:1}.shop{display:grid;grid-template-columns:1fr 1fr;gap:8px}.item{background:#f3faf8;border:1px solid #d6ebea;border-radius:12px;padding:10px}.item button{width:100%;font-size:12px;margin-top:7px}.muted{font-size:12px;color:#70909b;line-height:1.5;margin-top:8px}.log{max-height:150px;overflow:auto;font-size:12px}.log div{padding:6px;border-bottom:1px solid #e6f4ef}#tip{background:#fff4d8;padding:11px;border-radius:10px;margin:11px 0;min-height:37px;border:1px solid #f8e6ac}.chip{background:#eff9f8;border-radius:9px;padding:10px;margin:6px 0}@media(max-width:1000px){.layout{grid-template-columns:1fr}.shop{grid-template-columns:repeat(2,1fr)}}</style></head><body>
+<header><h1>🌸 KHÁCH SẠN BẢO BỐI 🌸</h1><div>TROPICAL RESORT • XÂY DỰNG THIÊN ĐƯỜNG NGHỈ DƯỠNG</div></header><main><div class="stats"><span>📅 Ngày <b id="day"></b></span><span>💰 <b id="cash"></b> xu</span><span>⭐ <b id="rep"></b> sao</span><span>🛏️ <b id="rooms"></b> phòng</span><span>👥 <b id="guests"></b> khách</span></div>
+<div class="layout"><section><div class="panel"><div class="row"><button id="outBtn" onclick="setView('outside')">🌳 TOÀN CẢNH</button><button id="inBtn" onclick="setView('inside')" class="alt">🏨 BÊN TRONG</button><button onclick="day()">🌞 NGÀY MỚI</button><button id="autoBtn" onclick="auto()" class="alt">⏱️ Tự chạy: Tắt</button></div><canvas id="game" width="1000" height="680"></canvas><div id="tip">Chạm vào các công trình để xem thông tin. Khách sẽ tự đi lại.</div><div class="muted">Góc nhìn phối cảnh khu nghỉ dưỡng • Bấm Toàn cảnh / Bên trong để đổi góc nhìn • Tiền trong game là tiền ảo.</div></div><div class="panel"><h2>📜 Nhật ký khách sạn</h2><div class="log" id="log"></div></div></section><aside><div class="panel"><h2>🛎️ Doanh thu ngày trước</h2><div id="report"></div></div><div class="panel"><h2>🛒 Xây dựng & nội thất</h2><div class="shop" id="shop"></div></div><div class="panel"><button class="alt" onclick="restart()">🔄 Bắt đầu lại</button><p class="muted">Game tự lưu trên trình duyệt này. Bản này chơi một mình; khách là nhân vật tự động.</p></div></aside></div></main>
 <script>
 const C=document.getElementById('game'),c=C.getContext('2d');const $=id=>document.getElementById(id);const key='baoboi-pixel-resort-v3';
 const items=[['rooms','🛏️ Phòng nghỉ',0,130,9],['decor','🪞 Nội thất',0,100,6],['garden','🌲 Cây xanh',0,60,6],['pool','🏊 Bể bơi',300,190,4],['gym','🏋️ Phòng gym',240,150,4],['food','🍽️ Nhà hàng',330,180,4]];
@@ -22,19 +22,68 @@ function flower(x,y){const [a,b]=P(x,y);rect(a-1,b-7,2,8,'#568c65');for(let i=0;
 function sprite(x,y,k=1,color='#c878a3',t=0){const [a,b]=P(x,y);const bob=Math.sin(t)*2;rect(a-4*k,b-7*k+bob,3*k,8*k,'#614d69');rect(a+2*k,b-7*k-bob,3*k,8*k,'#614d69');rect(a-8*k,b-22*k+bob,16*k,17*k,color);rect(a-5*k,b-33*k+bob,10*k,11*k,'#f2c9a8');rect(a-7*k,b-35*k+bob,14*k,5*k,'#6d4b51');rect(a-3*k,b-28*k+bob,2*k,2*k,'#563e45');rect(a+2*k,b-28*k+bob,2*k,2*k,'#563e45')}
 function bed(x,y,color){cube(x,y,1.4,1.9,12,'#c28b94','#ad7a85',color);cube(x,y,.4,1.9,20,'#aa7182','#9e6677','#e5c0d2');floor(x+.5,y+.2,.7,.55,'#fffaf3')}
 function windowAt(x,y){cube(x,y,.18,.65,39,'#91c9c9','#6b9fa9','#e9fbef');line(x+.15,y+.3,'✦',13,'#fff')}
-function drawOutside(){floor(0,0,12,11,'#8cc6a1');for(let x=0;x<12;x++)for(let y=0;y<11;y++)if((x+y)%2===0)floor(x,y,1,1,'#9fd2aa');floor(5.3,1,1.6,10,'#e7d5b5');floor(0,6.2,12,1.3,'#e7d5b5');
-cube(.8,.7,4.6,4.2,115+lv('rooms')*4,'#e5a8bd','#d28fa9','#f8dbe5');cube(.8,.7,4.6,4.2,11,'#e3c3ae','#d1a895','#fff1df');for(let i=0;i<lv('rooms');i++){const x=1.2+i%3*1.2,y=1.1+Math.floor(i/3)*1.1;windowAt(x,y)}cube(2.5,4.5,1.1,.5,34,'#b88c8e','#9c7184','#ffe5e5');line(2.9,5.6,'HOTEL',18,'#a6487c');
-for(let i=0;i<lv('garden')*3+5;i++){const x=1+(i*7%12),y=1+(i*5%10);if(x<6&&y<6)continue;if(i%3)tree(x,y,.7);else flower(x,y)}
-if(lv('pool')){floor(7,1.1,3.7,3,'#f9eadb');floor(7.3,1.4,3.1,2.4,'#67bdd6');for(let i=0;i<3;i++)floor(7.4+i*.8,1.6, .2,1.8,'#9ddbe8');line(9,4.1,'BỂ BƠI',17);cube(10.5,2,.3,1,12,'#f3d6a6','#f4d6a6','#fff2d5')}else line(8.8,2.6,'🔒 BỂ BƠI',16);
-if(lv('gym')){cube(7,6,3.1,2.5,54,'#b8c7d4','#96a8bb','#e6eff5');for(let i=0;i<3;i++)windowAt(7.5+i*.75,6.3);line(8.3,8.4,'GYM',17)}else line(8.3,7.5,'🔒 GYM',16);
-if(lv('food')){cube(1.2,8,3.1,2.2,49,'#e9b78f','#c9967f','#ffe3c2');line(2.6,10,'NHÀ HÀNG',16);line(2.6,9.1,'☕',24)}else line(2.7,9.2,'🔒 NHÀ HÀNG',16);
+
+function drawOutside(){
+  // Isometric resort campus: lush lawn, perimeter road and paths.
+  floor(-1,-1,14,13,'#9ccca2');
+  for(let x=-1;x<13;x++)for(let y=-1;y<12;y++){if((x+y)%2===0)floor(x,y,1,1,'#a7d8ad');}
+  floor(4.7,1,1.4,11,'#eadbc4');floor(-.4,6.2,13.3,1.2,'#eadbc4');
+  for(let i=0;i<9;i++){floor(5,1.6+i*1.05,.6,.09,'#fdf6df');}
+  // Hotel's elevated foundation, landscaped entrance
+  floor(.25,.15,5.6,5.6,'#d4bcaa');
+  cube(.55,.35,5,4.8,124+lv('rooms')*4,'#f4d9c3','#d4ad9c','#fff5e8');
+  // Overhanging white flat roof with decorative parapet
+  cube(.35,.18,5.4,5.15,12,'#f0e9da','#e2d3c0','#fff9e9');
+  // Windows and glass balconies on front facade
+  for(let row=0;row<3;row++)for(let col=0;col<4;col++){
+    const x=.95+col*1.05,y=4.94;
+    const [a,b]=P(x,y,34+row*30);
+    rect(a-13,b-23,26,22,'#f7faf8');rect(a-10,b-20,20,16,'#79bbcd');
+    rect(a-2,b-20,3,16,'#eaf7f5');rect(a-13,b-5,26,3,'#efe1d1');
+    rect(a-15,b+2,30,4,'#ffffff');
+  }
+  // Rooftop terrace with planters and soft green details
+  for(let i=0;i<4;i++){const [a,b]=P(1.2+i*1.1,.75,145+lv('rooms')*4);rect(a-6,b-3,12,6,'#e7e8d5');rect(a-3,b-13,6,12,'#5b9e77');}
+  // Entrance door & canopy
+  cube(2.35,5.13,1.35,.45,34,'#eacbb1','#cba98c','#fff1dc');
+  const [doorX,doorY]=P(2.85,5.26,10);
+  rect(doorX-12,doorY-30,24,34,'#387b85');rect(doorX-1,doorY-29,2,30,'#d7f6ed');
+  line(2.9,5.9,'✦ BẢO BỐI RESORT ✦',16,'#255f6a');
+  // Gardens and trees around the campus
+  for(let i=0;i<Math.min(24,8+lv('garden')*3);i++){
+    let x=.1+(i*4.73)%12.5,y=.1+(i*3.37)%11.5;
+    if(x<6&&y<6.1||x>6.7&&x<11.2&&y<4.8||x>6.6&&y>5.7&&y<9.5)continue;
+    if(i%3===0)flower(x,y);else tree(x,y,.62+i%3*.1);
+  }
+  // Swimming pool with gradient water tiles, shade and loungers
+  if(lv('pool')){
+    floor(6.65,.7,4.65,4.35,'#f9e9d7');
+    floor(7.05,1.1,3.85,3.45,'#6cc0d0');
+    for(let i=0;i<8;i++){floor(7.2+(i%4)*.9,1.2+Math.floor(i/4)*1.5,.4,.11,i%2?'#a8e7e8':'#86d7e0');}
+    for(let i=0;i<3;i++){cube(6.75+i*1.6,4.8,.9,.3,6,'#f4eee2','#e2d6c7','#fffef4');}
+    tree(11,1.1,.84);line(9.0,5.3,'🏊 HỒ BƠI',16,'#176b82');
+  }else{floor(7,1.2,3.9,3.2,'#c4d8bf');line(8.6,3,'🔒 HỒ BƠI',16);}
+  // Fitness building
+  if(lv('gym')){
+    floor(6.8,5.7,4.05,3.2,'#d7d1c5');
+    cube(7,5.8,3.45,2.65,68,'#afdbd7','#83b5b6','#f6eee1');
+    for(let i=0;i<3;i++){const [a,b]=P(7.4+i*.95,8.43,35);rect(a-9,b-18,18,18,'#5b9ca4');rect(a-1,b-18,2,18,'#d1e5dc');}
+    line(8.4,8.85,'🏋 FITNESS',15,'#2a6e78');
+  }else{line(8.25,7.5,'🔒 FITNESS',16);}
+  if(lv('food')){
+    floor(.6,7.7,4.25,3.3,'#f8e5d4');
+    cube(.8,7.9,3.7,2.55,56,'#f9d0a5','#daa98a','#fff3df');
+    for(let i=0;i<3;i++){const [a,b]=P(1.2+i,10.3,28);rect(a-8,b-18,16,18,'#8ccbc8');}
+    line(2.4,10.7,'☕ NHÀ HÀNG',15,'#946542');
+  }else{line(2.4,9.2,'🔒 NHÀ HÀNG',16);}
+  for(let i=0;i<8;i++)flower(4.5+i*.13,5.45+i*.19);
 }
 function drawInside(){floor(0,0,12,11,'#edd2bf');for(let x=0;x<12;x++)for(let y=0;y<11;y++)floor(x,y,1,1,(x+y)%2?'#f6e2d0':'#ffeddf');
 cube(0,0,12,.3,94,'#eab6c8','#d19caf','#ffe5ee');cube(0,0,.3,11,94,'#eab6c8','#d19caf','#ffe5ee');
 for(let i=0;i<Math.min(lv('rooms'),9);i++){const x=.8+(i%3)*3.6,y=1.2+Math.floor(i/3)*3.1;floor(x,y,3.2,2.8,'#f4c9d7');cube(x,y,3.2,.15,24,'#dc9fb8','#c38fa9','#ffe3ef');cube(x,y,.15,2.8,24,'#dc9fb8','#c38fa9','#ffe3ef');bed(x+.35,y+.35,i%2?'#d9b9e4':'#f7b6d0');cube(x+2.2,y+.4,.5,.6,17,'#aa8d84','#957a70','#e7d3bb');if(lv('decor')>=2)flower(x+2.4,y+1.5);if(lv('decor')>=3)cube(x+1.5,y+2,.8,.4,10,'#a38d9e','#a38d9e','#fff3da');line(x+1.5,y+2.5,'P'+(101+i),11)}
 cube(4.6,9,2.4,1,26,'#b78987','#9b747b','#f7d8c5');line(5.7,9.5,'LỄ TÂN',13);for(let i=0;i<lv('decor');i++){const x=.7+i*1.7;flower(x,10)}
 }
-function draw(){c.clearRect(0,0,1000,680);const g=c.createLinearGradient(0,0,0,680);g.addColorStop(0,'#cdebf4');g.addColorStop(1,'#e3f1df');c.fillStyle=g;c.fillRect(0,0,1000,680);if(s.view==='outside')drawOutside();else drawInside();for(let i=0;i<Math.min(12,Math.max(3,s.guests+2));i++){const t=frame*.013*(.55+i*.07)+i*2.2;let x,y;if(s.view==='outside'){x=5.5+Math.sin(t)*(.8+i%3*.5);y=6.7+Math.cos(t*.8)*(1.3+i%2)}else{x=3.4+Math.sin(t)*2.2;y=8.4+Math.cos(t*.7)*1.1}sprite(x,y,.78,['#ce6e9d','#7f9fc2','#dfaa73','#ac86c8'][i%4],t)}}
+function draw(){c.clearRect(0,0,1000,680);const g=c.createLinearGradient(0,0,0,680);g.addColorStop(0,'#88c9df');g.addColorStop(.6,'#e6f3e1');g.addColorStop(1,'#b4d9ae');c.fillStyle=g;c.fillRect(0,0,1000,680);c.fillStyle='#ffffff80';for(let i=0;i<8;i++){c.beginPath();c.ellipse(75+i*130,65+(i%3)*37,54,13,0,0,Math.PI*2);c.fill()}c.save();c.translate(-12,28);if(s.view==='outside')drawOutside();else drawInside();for(let i=0;i<Math.min(14,Math.max(3,s.guests+2));i++){const t=frame*.013*(.55+i*.07)+i*2.2;let x,y;if(s.view==='outside'){x=5.5+Math.sin(t)*(.8+i%3*.5);y=6.7+Math.cos(t*.8)*(1.3+i%2)}else{x=3.4+Math.sin(t)*2.2;y=8.4+Math.cos(t*.7)*1.1}sprite(x,y,.78,['#ce6e9d','#7f9fc2','#dfaa73','#ac86c8'][i%4],t)}c.restore();c.fillStyle='#164e60bb';c.fillRect(18,18,180,33);c.fillStyle='#fff';c.font='bold 16px system-ui';c.textAlign='center';c.fillText(s.view==='outside'?'🌿 RESORT OVERVIEW':'🛏️ HOTEL INTERIOR',108,40);}
 function render(){ $('day').textContent=s.day;$('cash').textContent=s.cash;$('rep').textContent=Math.min(5,1+Math.floor((lv('garden')+lv('decor')+lv('pool')+lv('gym')+lv('food'))/4));$('rooms').textContent=lv('rooms');$('guests').textContent=s.guests;const r=s.report;$('report').innerHTML='<div class="chip">🛏️ Đặt phòng: <b>'+r.booked+'</b></div><div class="chip">💵 Tiền phòng: <b>'+r.room+'</b> xu</div><div class="chip">🍹 Tiện ích: <b>'+r.services+'</b> xu</div><div class="chip">💰 Tổng thu: <b>'+r.total+'</b> xu</div>';
 $('outBtn').className=s.view==='outside'?'':'alt';$('inBtn').className=s.view==='inside'?'':'alt';$('shop').replaceChildren();for(const [id,name,build,upgrade,max] of items){const l=lv(id),cost=l?upgrade*l:build,box=document.createElement('div');box.className='item';const title=document.createElement('b');title.textContent=name;const info=document.createElement('div');info.className='muted';info.textContent='Cấp '+l+'/'+max;const btn=document.createElement('button');btn.textContent=l>=max?'Tối đa':(l?'Nâng cấp ':'Xây mới ')+cost+' xu';btn.disabled=l>=max||s.cash<cost;btn.onclick=()=>buy(id);box.append(title,info,btn);$('shop').append(box)}$('log').replaceChildren();for(const t of s.log){const d=document.createElement('div');d.textContent=t;$('log').append(d)}save()}
 function buy(id){const def=items.find(a=>a[0]===id),l=lv(id),cost=l?def[3]*l:def[2];if(l>=def[4]||s.cash<cost)return;s.cash-=cost;s.levels[id]=l+1;notice('Đã nâng cấp '+def[1]+' lên cấp '+(l+1)+'!');render()}
